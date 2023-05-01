@@ -14,14 +14,13 @@ How setup a Telegraf bot to the AWS using Serverless
 * first deploy ` serverless deploy ` 
 
 
-### > setup the handler hook
+### > setup the handler.js hook
 ```
 require("dotenv").config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const { Telegraf } = require("telegraf");
-const { setCommands } = require("./src/setCommands");
-
+const { setCommands } = require("./src/setCommands"); 
 
  module.exports.webhook = (event, context, callback) => {
   const body = JSON.parse(event.body);
@@ -38,8 +37,18 @@ const { setCommands } = require("./src/setCommands");
 
   return callback(null, response);
 }; 
-
 ```
+
+### > setup the  commands in src/setComands.js
+```
+module.exports.setCommands = (bot) => {
+  //randomly chooses one greeting
+  bot.start((ctx) => {
+    return ctx.reply("working fromt the aws!");
+  });
+};
+```
+
 ### > Edit the serverless.yml 
 ```
 service: <your service name>
@@ -58,3 +67,28 @@ functions:
           method: post
 
 ```
+
+### > Webhook setup
+* deploy ` serverless deploy ` again
+It will pack all your files into .zip archive and upload to AWS, then it will create AWS API Gateway and return API endpoint. You will receive something like this:
+` POST - https://asd0asd9.execute-api.us-east-1.amazonaws.com/dev/your-custom-url `
+
+* execute this request
+```
+curl --request POST --url https://api.telegram.org/bot<Your bot TOKEN>/setWebhook --header 'content-type: application/json' --data '{"url": "<your API endpoint url"}'
+
+```
+
+if eberything worked then you will recieve this
+
+```
+{
+  "ok": true,
+  "result": true,
+  "description": "Webhook was set"
+}
+```
+* last deploy ` serverless deploy ` 
+Now it’s live! Congratulations.
+ 
+
