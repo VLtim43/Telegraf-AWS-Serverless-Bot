@@ -42,7 +42,6 @@ const { setCommands } = require("./src/setCommands");
 ### > setup the  commands in src/setComands.js
 ```
 module.exports.setCommands = (bot) => {
-  //randomly chooses one greeting
   bot.start((ctx) => {
     return ctx.reply("working fromt the aws!");
   });
