@@ -69,7 +69,9 @@ functions:
 
 ### > Webhook setup
 * deploy ` serverless deploy ` again
+
 It will pack all your files into .zip archive and upload to AWS, then it will create AWS API Gateway and return API endpoint. You will receive something like this:
+
 ` POST - https://asd0asd9.execute-api.us-east-1.amazonaws.com/dev/your-custom-url `
 
 * execute this request
@@ -88,6 +90,7 @@ if eberything worked then you will recieve this
 }
 ```
 * last deploy ` serverless deploy ` 
+
 Now it’s live! Congratulations.
  
 
