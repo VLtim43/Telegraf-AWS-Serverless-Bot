@@ -1,4 +1,4 @@
-How setup a Telegraf bot to the AWS using Serverless
+## How setup a Telegraf bot to the AWS using Serverless
 
 ### > Create telegram bot and place the bot token in the .env file 
 
